@@ -6,14 +6,15 @@
 /*   By: asanthos <asanthos@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/27 12:16:59 by asanthos          #+#    #+#             */
-/*   Updated: 2022/02/07 12:53:02 by asanthos         ###   ########.fr       */
+/*   Updated: 2022/03/20 18:35:34 by asanthos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	check_int(double r)
+static void	check_int(long r, int s)
 {
+	r *= s;
 	if (r > 2147483647 || r < -2147483648)
 	{
 		ft_putstr("Error\n");
@@ -34,7 +35,7 @@ int	ft_atoi(const char *str)
 {
 	int		i;
 	int		s;
-	double	r;
+	long	r;
 
 	i = 0;
 	s = 1;
@@ -50,11 +51,12 @@ int	ft_atoi(const char *str)
 	check_num(str, i);
 	while (str[i] <= '9' && str[i] >= '0')
 	{
-		 r *= 10;
-		 r = r + (str[i] - '0');
-		 i++;
+		r *= 10;
+		r += (str[i] - '0');
+		check_int(r, s);
+		i++;
 	}
 	r *= s;
-	check_int(r);
 	return (r);
 }
+
